@@ -58,3 +58,11 @@ router.get("/signup",function(req,res){
   res.render("signup");
 });
 module.exports = router;
+
+// Code to set route of user_profile
+router.get('/user_profile',isLoggedIn,async function(req,res){
+  const user= await userModel.findOne({
+    username: req.session.passport.user 
+  })
+  res.render("user_profile",{user});
+});
